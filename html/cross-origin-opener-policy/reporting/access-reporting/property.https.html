@@ -22,11 +22,9 @@ let property= [
   ["closed"      , w => w.closed             ] ,
   ["focus"       , w => w.focus()            ] ,
   ["frames"      , w => w.frames             ] ,
-  ["indexed"     , w => w[0]                 ] ,
   ["length"      , w => w.length             ] ,
   ["location"    , w => w.location           ] ,
   ["location"    , w => w.location = "#"     ] ,
-  ["named"       , w => w["test"]            ] ,
   ["opener"      , w => w.opener             ] ,
   ["opener"      , w => w.opener = ""        ] ,
   ["postMessage" , w => w.postMessage("")    ] ,
@@ -44,8 +42,8 @@ origin.forEach(([origin_name, origin]) => {
       const callback_token = token();
 
       const reportTo = reportToHeaders(report_token);
-      const openee_url = origin+ executor_path +
-        reportTo.header + reportTo.coopReportOnlySameOriginHeader + coep_header +
+      const openee_url = origin + executor_path + reportTo.header +
+        reportTo.coopReportOnlySameOriginHeader + coep_header +
         `&uuid=${executor_token}`;
       const openee = window.open(openee_url);
       t.add_cleanup(() => send(executor_token, "window.close()"))
